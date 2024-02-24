@@ -30,8 +30,19 @@ public partial class WledDeviceViewModel : ObservableObject
         Brightness = device.Brightness;
         IsOn = device.WledDevice.State.On;
         NetworkAddressUri = $"http://{NetworkAddress}";
-        ProductName = $"Pixel Pulse - {Name} @ {NetworkAddressUri}";
-
+        EndpointName = $"{Name} @ {NetworkAddressUri}";
+        ProductName = $"Pixel Pulse - {EndpointName}";
+        if (device.LedCount.HasValue) LedCount = device.LedCount.Value;
+        if (device.PowerUsage.HasValue) PowerUsage = device.PowerUsage.Value;
+        LedDetails = $"({LedCount}, {PowerUsage}mA";
+        if (Is2D)
+        {
+            LedDetails += $", 2D={Width}x{Height})";
+        }
+        else
+        {
+            LedDetails += ", 1D)";
+        }
         OnOffText = IsOn ? "Turn Off" : "Turn On";
     }
 
@@ -68,6 +79,17 @@ public partial class WledDeviceViewModel : ObservableObject
         await Shell.Current.GoToAsync($"managepage", navigationParameter);
     }
 
+    //[RelayCommand]
+    //private async Task ViewManage()
+    //{
+    //    //await App.Current.MainPage.Navigation.PushAsync(new ManageWebUIPage() { SelectedWledDeviceViewModel = this });
+    //    var navigationParameter = new ShellNavigationQueryParameters
+    //    {
+    //        { "SelectedWledDeviceViewModel", this }
+    //    };
+    //    await Shell.Current.GoToAsync($"managedevicepage", navigationParameter);
+    //}
+
     [RelayCommand]
     private async Task GoBackHome()
     {
@@ -89,6 +111,10 @@ public partial class WledDeviceViewModel : ObservableObject
 
     [ObservableProperty] private string productName;
 
+    [ObservableProperty] private string endpointName;
+
+    [ObservableProperty] private string ledDetails;
+
     [ObservableProperty] private int? width;
 
     [ObservableProperty] private int? height;
@@ -100,4 +126,8 @@ public partial class WledDeviceViewModel : ObservableObject
     [ObservableProperty] private bool isOn;
 
     [ObservableProperty] private string onOffText;
+
+    [ObservableProperty] private int ledCount;
+
+    [ObservableProperty] private int powerUsage;
 }

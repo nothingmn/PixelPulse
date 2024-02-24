@@ -69,6 +69,7 @@ namespace PixelPulse
         private static void RegisterRoutes()
         {
             Routing.RegisterRoute("managepage", typeof(ManageWebUIPage));
+            Routing.RegisterRoute("managedevicepage", typeof(MangeDevicePage));
         }
 
         public static MauiApp App { get; set; }

@@ -17,9 +17,19 @@ public class WLEDDevice
         get { return _apiManager.Height; }
     }
 
+    public int? LedCount
+    {
+        get { return _apiManager.LedCount; }
+    }
+
     public bool Is2D
     {
         get { return _apiManager.Is2D; }
+    }
+
+    public int? PowerUsage
+    {
+        get { return _apiManager.PowerUsage; }
     }
 
     public int Brightness

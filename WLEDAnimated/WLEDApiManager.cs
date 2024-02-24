@@ -32,6 +32,26 @@ public class WLEDApiManager : IWLEDApiManager
         }
     }
 
+    public int? LedCount
+    {
+        get
+        {
+            if (Is2D)
+            {
+                return WledDevice?.Information?.Leds?.Matrix?.Height * WledDevice.Information.Leds.Matrix.Width;
+            }
+            return WledDevice?.Information?.Leds?.Count;
+        }
+    }
+
+    public int? PowerUsage
+    {
+        get
+        {
+            return WledDevice?.Information?.Leds?.PowerUsage;
+        }
+    }
+
     public bool Is2D
     {
         get

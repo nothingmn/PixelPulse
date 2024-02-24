@@ -15,19 +15,19 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Text="{Binding Name}" FontSize="20" />
-                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding NetworkAddress}" FontSize="15" />
-                            <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding Brightness}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding ChangeBrightnessCommand}" ></Slider>
-                            <Button Grid.Row="3" Grid.Column="0" Text="{Binding OnOffText, Mode=TwoWay}" Margin="10" Command="{Binding ToggleLightCommand}"></Button>
-                            <Button Grid.Row="3" Grid.Column="1" Text="Manage" Margin="10" Command="{Binding ViewManageCommand}"></Button>
-                            <Button Grid.Row="3" Grid.Column="2" Text="2D" IsVisible="{Binding Is2D}" Margin="10" Command="{Binding View2DCommand}"></Button>
+
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalOptions="Start" Text="{Binding EndpointName}" FontSize="20" />
+                            <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="End"  Text="{Binding LedDetails}" FontSize="15" />
+                            <Slider Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding Brightness}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding ChangeBrightnessCommand}" ></Slider>
+                            <Button Grid.Row="2" Grid.Column="0" Text="{Binding OnOffText, Mode=TwoWay}" Margin="10" Command="{Binding ToggleLightCommand}"></Button>
+                            <Button Grid.Row="2" Grid.Column="1" Text="Manage" Margin="10" Command="{Binding ViewManageCommand}"></Button>
+                            <Button Grid.Row="2" Grid.Column="2" Text="2D" IsVisible="{Binding Is2D}" Margin="10" Command="{Binding View2DCommand}"></Button>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

@@ -6,6 +6,8 @@ public interface IWLEDApiManager
 {
     public int? Width { get; }
     public int? Height { get; }
+    public int? LedCount { get; }
+    public int? PowerUsage { get; }
     public bool Is2D { get; }
 
     Task<WLedRootResponse> Connect(string ipAddress);
