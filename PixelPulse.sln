@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PixelPulse", "PixelPulse\PixelPulse.csproj", "{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kevsoft.WLED", "Kevsoft.WLED\Kevsoft.WLED.csproj", "{2F84EBFB-A1B6-40CB-8672-40E601C9EEC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageGeneration", "ImageGeneration\ImageGeneration.csproj", "{2B4FEDD7-F4E7-4E4D-9D67-F7821C18814F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPM2", "TPM2\TPM2.csproj", "{CE2A5A6E-FAA5-4501-8B7A-69D056464687}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WLEDAnimated", "WLEDAnimated\WLEDAnimated.csproj", "{D910DD69-50A9-4161-96FB-85BAC6A6905F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimationCore", "AnimationCore\AnimationCore.csproj", "{A10FD116-5EFA-49A0-A1A0-0AC73600E552}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CCB1902-71CB-4E7D-A9FF-8188B60A5DA9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2F84EBFB-A1B6-40CB-8672-40E601C9EEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F84EBFB-A1B6-40CB-8672-40E601C9EEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F84EBFB-A1B6-40CB-8672-40E601C9EEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F84EBFB-A1B6-40CB-8672-40E601C9EEC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4FEDD7-F4E7-4E4D-9D67-F7821C18814F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4FEDD7-F4E7-4E4D-9D67-F7821C18814F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4FEDD7-F4E7-4E4D-9D67-F7821C18814F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4FEDD7-F4E7-4E4D-9D67-F7821C18814F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2A5A6E-FAA5-4501-8B7A-69D056464687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2A5A6E-FAA5-4501-8B7A-69D056464687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2A5A6E-FAA5-4501-8B7A-69D056464687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2A5A6E-FAA5-4501-8B7A-69D056464687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D910DD69-50A9-4161-96FB-85BAC6A6905F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D910DD69-50A9-4161-96FB-85BAC6A6905F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D910DD69-50A9-4161-96FB-85BAC6A6905F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D910DD69-50A9-4161-96FB-85BAC6A6905F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A10FD116-5EFA-49A0-A1A0-0AC73600E552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A10FD116-5EFA-49A0-A1A0-0AC73600E552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A10FD116-5EFA-49A0-A1A0-0AC73600E552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A10FD116-5EFA-49A0-A1A0-0AC73600E552}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {755202A9-EE58-4788-998F-1865D3961F5A}
+	EndGlobalSection
+EndGlobal

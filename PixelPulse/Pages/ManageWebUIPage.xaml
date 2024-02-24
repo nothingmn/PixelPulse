@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PixelPulse.Models.ViewModels"
+             x:Class="PixelPulse.Pages.ManageWebUIPage"
+             Title="{Binding ProductName}">
+    <ContentPage.Content>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Text="&lt; Back" Margin="10" Command="{Binding GoBackHomeCommand}" ></Button>
+
+            <WebView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="Aquamarine"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Source="{Binding NetworkAddressUri}">
+            </WebView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

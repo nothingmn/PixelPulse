@@ -1,0 +1,1 @@
+Pixel Pulse is an alternative WLED Management App built from the ground up using .NET Maui
