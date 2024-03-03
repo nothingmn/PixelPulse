@@ -73,7 +73,7 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj -r win-x64
+        run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI Windows
         run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
