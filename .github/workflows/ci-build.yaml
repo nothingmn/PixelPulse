@@ -45,7 +45,7 @@ jobs:
         run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore
 
       - name: Directory listing
-        run: dir /s
+        run: Get-ChildItem -Recurse
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
@@ -78,7 +78,7 @@ jobs:
         run: dotnet publish PixelPulse/PixelPulse.sln -c Release -f net8.0-windows10.0.19041.0 --no-restore
 
       - name: Directory listing
-        run: dir /s
+        run: Get-ChildItem -Recurse
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
