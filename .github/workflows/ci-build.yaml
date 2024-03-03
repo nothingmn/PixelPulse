@@ -113,30 +113,30 @@ jobs:
           path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*.app
 
 # MAUI MacCatalyst Build
-  build-mac:
-    runs-on: macos-12
-    name: MacCatalyst Build
-    steps:
+  # build-mac:
+  #   runs-on: macos-12
+  #   name: MacCatalyst Build
+  #   steps:
     
-      - name: Checkout
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+  #     - name: Checkout
+  #       uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
+  #     - name: Setup .NET 8
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: 8.0.x
 
-      - name: Install MAUI Workload
-        run: dotnet workload install maui --ignore-failed-sources
+  #     - name: Install MAUI Workload
+  #       run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj
+  #     - name: Restore Dependencies
+  #       run: dotnet restore PixelPulse/PixelPulse.csproj
 
-      - name: Build MAUI MacCatalyst
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True -p:MtouchLink=Full -p:CreatePackage=false
+  #     - name: Build MAUI MacCatalyst
+  #       run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True -p:MtouchLink=Full -p:CreatePackage=false
 
-      - name: Upload MacCatalyst Artifact
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
-        with:
-          name: pixelpulse-macos-ci-build
-          path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
+  #     - name: Upload MacCatalyst Artifact
+  #       uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+  #       with:
+  #         name: pixelpulse-macos-ci-build
+  #         path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
