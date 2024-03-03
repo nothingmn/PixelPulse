@@ -57,7 +57,7 @@ jobs:
 
 # MAUI Windows Build
   build-windows:
-    runs-on: windows-2022
+    runs-on: windows-latest
     name: Windows Build
     steps:
 
