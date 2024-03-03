@@ -71,6 +71,8 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>com.robchartier.pixelpulse</ApplicationId>
+		<MtouchUseLlvm>False</MtouchUseLlvm>
+		<AotAssemblies>True</AotAssemblies>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">

@@ -107,7 +107,7 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI iOS
-        run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False /p:MtouchLink=None /p:PublishTrimmed=True
+        run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
       - name: Directory listing
         run: find $PWD
