@@ -23,7 +23,7 @@ env:
 jobs:
 # MAUI Android Build
   build-android:
-    runs-on: windows-2022
+    runs-on: windows-latest
     name: Android Build
     steps:
 
@@ -42,7 +42,9 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore
+        env:
+          SigningKeyPassword: ${{ secrets.ANDROIDSIGNINGKEYPASS }}
+        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore  /p:AndroidSigningKeyPass=%SigningKeyPassword% /p:AndroidSigningStorePass=%SigningKeyPassword%
 
       - name: Directory listing
         run: Get-ChildItem -Recurse
