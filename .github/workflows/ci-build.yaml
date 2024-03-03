@@ -72,10 +72,10 @@ jobs:
 
       - name: Restore Dependencies
         run: 
-            dotnet restore PixelPulse/PixelPulse.sln -r win-x64
+            dotnet restore PixelPulse.sln -r win-x64
 
       - name: Build MAUI Windows
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
+        run: dotnet publish PixelPulse/PixelPulse.sln -c Release -f net8.0-windows10.0.19041.0 --no-restore
 
       - name: Directory listing
         run: dir /s
