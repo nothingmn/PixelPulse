@@ -22,7 +22,7 @@ public class ImageToConverterFactory : IImageToConverterFactory
         if (string.IsNullOrWhiteSpace(type))
         {
             type = _config["WLED:ImageConverter"];
-            if (string.IsNullOrWhiteSpace(type)) type = "TPM2NET";
+            if (string.IsNullOrWhiteSpace(type)) type = "DNRGB";
         }
 
         return _services.GetKeyedService<IImageConverter>(type);

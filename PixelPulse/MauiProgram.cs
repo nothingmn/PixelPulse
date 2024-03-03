@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using PixelPulse.Pages;
 using WLEDAnimated;
 using WLEDAnimated.Animation;
@@ -14,14 +15,17 @@ namespace PixelPulse
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
 
-            builder.Services.AddKeyedTransient<IImageConverter, ImageToDNRGBConverter>("DNRGB");
+                ;
+
             builder.Services.AddKeyedTransient<IImageConverter, ImageToTPM2NETConverter>("TPM2NET");
+            builder.Services.AddKeyedTransient<IImageConverter, ImageToDNRGBConverter>("DNRGB");
 
             builder.Services.AddTransient<IImageResizer, ImageSharpImageResizer>();
 
@@ -69,7 +73,7 @@ namespace PixelPulse
         private static void RegisterRoutes()
         {
             Routing.RegisterRoute("managepage", typeof(ManageWebUIPage));
-            Routing.RegisterRoute("managedevicepage", typeof(MangeDevicePage));
+            Routing.RegisterRoute("manage2dpage", typeof(Manage2DPage));
         }
 
         public static MauiApp App { get; set; }

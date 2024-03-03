@@ -166,10 +166,16 @@ public class ImageSharpImageResizer : IImageResizer
         {
             return resampler;
         }
-        else
+
+        foreach (var resamplerKey in resamplers.Keys)
         {
-            throw new ArgumentException($"Unsupported resampler: {resamplerName}");
+            if (resamplers.TryGetValue(resamplerKey, out var resampler1))
+            {
+                return resampler1;
+            }
         }
+
+        return null;
     }
 
     public (int, int) CalculateNewDimensions(int screenWidth, int screenHeight, int imageWidth, int imageHeight)

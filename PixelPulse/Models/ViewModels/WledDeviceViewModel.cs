@@ -11,6 +11,7 @@ public partial class WledDeviceViewModel : ObservableObject
 {
     private WLEDDevice _device;
     private readonly IWLEDApiManager _apiManager;
+    private readonly IServiceProvider _provider;
 
     public WledDeviceViewModel(WLEDDevice device, IWLEDApiManager apiManager)
     {
@@ -78,17 +79,6 @@ public partial class WledDeviceViewModel : ObservableObject
         await Shell.Current.GoToAsync($"managepage", navigationParameter);
     }
 
-    //[RelayCommand]
-    //private async Task ViewManage()
-    //{
-    //    //await App.Current.MainPage.Navigation.PushAsync(new ManageWebUIPage() { SelectedWledDeviceViewModel = this });
-    //    var navigationParameter = new ShellNavigationQueryParameters
-    //    {
-    //        { "SelectedWledDeviceViewModel", this }
-    //    };
-    //    await Shell.Current.GoToAsync($"managedevicepage", navigationParameter);
-    //}
-
     [RelayCommand]
     private async Task GoBackHome()
     {
@@ -97,9 +87,15 @@ public partial class WledDeviceViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private Task View2D()
+    private async Task View2D()
     {
-        return Task.CompletedTask;
+        var vm = new Manage2DDeviceViewModel(this._device, this._apiManager);
+
+        var navigationParameter = new ShellNavigationQueryParameters
+        {
+            { "Manage2DDeviceViewModel", vm }
+        };
+        await Shell.Current.GoToAsync($"manage2dpage", navigationParameter);
     }
 
     [ObservableProperty] private string networkAddressUri;

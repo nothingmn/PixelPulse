@@ -103,6 +103,6 @@ public class Tpm2UdpClient : IDisposable
 
     public void Dispose()
     {
-        udpClient.Dispose();
+        udpClient?.Dispose();
     }
 }

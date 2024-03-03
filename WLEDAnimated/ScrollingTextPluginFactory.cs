@@ -7,6 +7,8 @@ namespace WLEDAnimated;
 public interface IScrollingTextPluginFactory
 {
     IScrollingTextPlugin LoadPluginByName(string name);
+
+    IList<IScrollingTextPlugin> GetAllPlugins();
 }
 
 public class ScrollingTextPluginFactory : IScrollingTextPluginFactory
@@ -16,6 +18,11 @@ public class ScrollingTextPluginFactory : IScrollingTextPluginFactory
     public ScrollingTextPluginFactory(IServiceProvider provider)
     {
         _provider = provider;
+    }
+
+    public IList<IScrollingTextPlugin> GetAllPlugins()
+    {
+        return _provider.GetServices<IScrollingTextPlugin>().ToList();
     }
 
     public IScrollingTextPlugin LoadPluginByName(string name)
