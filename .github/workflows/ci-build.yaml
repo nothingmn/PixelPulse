@@ -70,13 +70,13 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI Windows
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net6.0-windows10.0.19041.0 --no-restore
+        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-windows-ci-build
-          path: PixelPulse/bin/Release/net6.0-windows10.0.19041.0/win10-x64/AppPackages/MauiBeach*/MauiBeach*.msix
+          path: PixelPulse/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/MauiBeach*/MauiBeach*.msix
 
 # MAUI iOS Build
   build-ios:
