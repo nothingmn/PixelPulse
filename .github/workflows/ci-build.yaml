@@ -22,38 +22,38 @@ env:
 
 jobs:
 # MAUI Android Build
-  build-android:
-    runs-on: windows-latest
-    name: Android Build
-    steps:
+  # build-android:
+  #   runs-on: windows-latest
+  #   name: Android Build
+  #   steps:
 
-      - name: Checkout
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+  #     - name: Checkout
+  #       uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
+  #     - name: Setup .NET 8
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: 8.0.x
           
-      - name: Install MAUI Workload
-        run: dotnet workload install maui --ignore-failed-sources
+  #     - name: Install MAUI Workload
+  #       run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj
+  #     - name: Restore Dependencies
+  #       run: dotnet restore PixelPulse/PixelPulse.csproj
 
-      - name: Build MAUI Android
-        env:
-          SigningKeyPassword: ${{ secrets.ANDROIDSIGNINGKEYPASS }}
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore  /p:AndroidSigningKeyPass=%SigningKeyPassword% /p:AndroidSigningStorePass=%SigningKeyPassword%
+  #     - name: Build MAUI Android
+  #       env:
+  #         SigningKeyPassword: ${{ secrets.ANDROIDSIGNINGKEYPASS }}
+  #       run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore  /p:AndroidSigningKeyPass=%SigningKeyPassword% /p:AndroidSigningStorePass=%SigningKeyPassword%
 
-      - name: Directory listing
-        run: Get-ChildItem -Recurse
+  #     - name: Directory listing
+  #       run: Get-ChildItem -Recurse
 
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
-        with:
-          name: pixelpulse-android-ci-build
-          path: PixelPulse/bin/Release/net8.0-android/*Signed.a*
+  #     - name: Upload Android Artifact
+  #       uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+  #       with:
+  #         name: pixelpulse-android-ci-build
+  #         path: PixelPulse/bin/Release/net8.0-android/*Signed.a*
 
 # MAUI Windows Build
   build-windows:
@@ -88,68 +88,68 @@ jobs:
           path: PixelPulse/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/pixelpulse*/pixelpulse*.msix
 
 # MAUI iOS Build
-  build-ios:
-    runs-on: macos-latest
-    name: iOS Build
-    steps:
+#   build-ios:
+#     runs-on: macos-latest
+#     name: iOS Build
+#     steps:
 
-      - name: Checkout
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+#       - name: Checkout
+#         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
+#       - name: Setup .NET 8
+#         uses: actions/setup-dotnet@v3
+#         with:
+#           dotnet-version: 8.0.x
 
-      - name: Install MAUI Workload
-        run: dotnet workload install maui --ignore-failed-sources
+#       - name: Install MAUI Workload
+#         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj
+#       - name: Restore Dependencies
+#         run: dotnet restore PixelPulse/PixelPulse.csproj
 
-      - name: Build MAUI iOS
-        run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+#       - name: Build MAUI iOS
+#         run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
-      - name: Directory listing
-        run: find $PWD
+#       - name: Directory listing
+#         run: find $PWD
 
 
-      - name: Upload iOS Artifact
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
-        with:
-          name: pixelpulse-ios-ci-build
-          path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*
+#       - name: Upload iOS Artifact
+#         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+#         with:
+#           name: pixelpulse-ios-ci-build
+#           path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*
 
 # MAUI MacCatalyst Build
-  build-mac:
-    runs-on: macos-12
-    name: MacCatalyst Build
-    steps:
+#   build-mac:
+#     runs-on: macos-12
+#     name: MacCatalyst Build
+#     steps:
     
-      - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+#       - name: Checkout
+#         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 v4
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4
-        with:
-          dotnet-version: 8.0.x
+#       - name: Setup .NET 8
+#         uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 v4
+#         with:
+#           dotnet-version: 8.0.x
 
-      - name: Install MAUI Workload
-        run: dotnet workload install maui --ignore-failed-sources
+#       - name: Install MAUI Workload
+#         run: dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj
+#       - name: Restore Dependencies
+#         run: dotnet restore PixelPulse/PixelPulse.csproj
 
-      - name: Build MAUI MacCatalyst
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
+#       - name: Build MAUI MacCatalyst
+#         run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
 
-      - name: Directory listing
-        run: find $PWD
+#       - name: Directory listing
+#         run: find $PWD
 
 
-      - name: Upload MacCatalyst Artifact
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
-        with:
-          name: pixelpulse-macos-ci-build
-          path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*
+#       - name: Upload MacCatalyst Artifact
+#         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+#         with:
+#           name: pixelpulse-macos-ci-build
+#           path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*
 
