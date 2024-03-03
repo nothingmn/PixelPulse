@@ -1,4 +1,5 @@
-﻿using SixLabors.ImageSharp;
+﻿using DDP;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.PixelFormats;
 using TPM2;
@@ -6,39 +7,37 @@ using WLEDAnimated.Interfaces;
 
 namespace WLEDAnimated;
 
-public class ImageToTPM2NETConverter : IImageConverter
+public class ImageToDDPConverter : IImageConverter
 {
     private readonly IImageResizer _imageResizer;
 
-    public ImageToTPM2NETConverter(IImageResizer imageResizer)
+    public ImageToDDPConverter(IImageResizer imageResizer)
     {
         _imageResizer = imageResizer;
     }
 
     private List<byte[]> ConvertImageOrFrameToBytePayload(PixelAccessor<Rgba32> image, int startIndex, byte wait = 10)
     {
-        using (var client = new Tpm2UdpClient())
+        var client = new DdpPacketCreator();
+
+        List<byte> data = new List<byte>();
+        int index = 0;
+        for (int y = 0; y < image.Height; y++)
         {
-            var ledStrip = new LEDStrip(image.Height * image.Width);
+            var pixelRow = image.GetRowSpan(y);
 
-            int index = 0;
-            for (int y = 0; y < image.Height; y++)
+            // pixelRow.Length has the same value as accessor.Width,
+            // but using pixelRow.Length allows the JIT to optimize away bounds checks:
+            for (int x = 0; x < image.Width; x++)
             {
-                var pixelRow = image.GetRowSpan(y);
-
-                // pixelRow.Length has the same value as accessor.Width,
-                // but using pixelRow.Length allows the JIT to optimize away bounds checks:
-                for (int x = 0; x < image.Width; x++)
-                {
-                    // Get a reference to the pixel at position x
-                    ref var pixel = ref pixelRow[x];
-                    ledStrip.SetLED(index, new LED(pixel.R, pixel.G, pixel.B));
-                    index++;
-                }
+                // Get a reference to the pixel at position x
+                ref var pixel = ref pixelRow[x];
+                data.AddRange([pixel.R, pixel.G, pixel.B]);
+                index++;
             }
-
-            return client.ConstructPayload(ledStrip);
         }
+
+        return client.CreateDdpPackets(data.ToArray());
     }
 
     public List<List<byte[]>> ConvertImage(string path, Size dimensions, int startIndex = 0, byte wait = 10)
@@ -52,13 +51,10 @@ public class ImageToTPM2NETConverter : IImageConverter
             {
                 foreach (var frame in image.Frames.Cast<ImageFrame<Rgba32>>())
                 {
-                    using (frame)
+                    frame.ProcessPixelRows(accessor =>
                     {
-                        frame.ProcessPixelRows(accessor =>
-                        {
-                            frames.Add(ConvertImageOrFrameToBytePayload(accessor, startIndex, wait));
-                        });
-                    }
+                        frames.Add(ConvertImageOrFrameToBytePayload(accessor, startIndex, wait));
+                    });
                 }
             }
             else

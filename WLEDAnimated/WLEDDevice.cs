@@ -53,8 +53,9 @@ public class WLEDDevice
             WledDevice = await _apiManager.Connect(NetworkAddress);
             if (WledDevice != null && WledDevice.Information != null) return true;
         }
-        catch
+        catch (Exception ex)
         {
+            var x = ex;
         }
         return false;
     }

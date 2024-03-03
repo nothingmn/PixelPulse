@@ -31,17 +31,16 @@ public partial class WledDeviceViewModel : ObservableObject
         IsOn = device.WledDevice.State.On;
         NetworkAddressUri = $"http://{NetworkAddress}";
         EndpointName = $"{Name} @ {NetworkAddressUri}";
-        ProductName = $"Pixel Pulse - {EndpointName}";
+        ProductName = EndpointName;
         if (device.LedCount.HasValue) LedCount = device.LedCount.Value;
         if (device.PowerUsage.HasValue) PowerUsage = device.PowerUsage.Value;
-        LedDetails = $"({LedCount}, {PowerUsage}mA";
         if (Is2D)
         {
-            LedDetails += $", 2D={Width}x{Height})";
+            LedDetails = $"({Width}x{Height}={LedCount}, {PowerUsage}mA)";
         }
         else
         {
-            LedDetails += ", 1D)";
+            LedDetails = $"({LedCount}, {PowerUsage}mA)";
         }
         OnOffText = IsOn ? "Turn Off" : "Turn On";
     }
@@ -62,7 +61,7 @@ public partial class WledDeviceViewModel : ObservableObject
     {
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
         var request = _apiManager.ConvertStateResponseToRequest(_device.WledDevice.State);
-        request.Brightness = (byte)this.brightness;
+        request.Brightness = (byte)Brightness;
         await _apiManager.SetStateFromRequest(request);
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
         UpdateState(_device);

@@ -9,7 +9,6 @@ namespace WLEDAnimated;
 public class DeviceDiscovery
 {
     private readonly IServiceProvider _services;
-    private static DeviceDiscovery Instance;
     private ServiceBrowser serviceBrowser;
 
     public event EventHandler<DeviceCreatedEventArgs> ValidDeviceFound;
@@ -35,10 +34,8 @@ public class DeviceDiscovery
     private async void OnServiceAdded(object sender, ServiceAnnouncementEventArgs e)
     {
         var wledDevice = _services.GetService(typeof(WLEDDevice)) as WLEDDevice;
-        foreach (var addr in e.Announcement.Addresses)
-        {
-            wledDevice.NetworkAddress = addr.ToString(); break; //only get first address
-        }
+
+        wledDevice.NetworkAddress = e.Announcement.Addresses.FirstOrDefault().ToString();
         wledDevice.Name = e.Announcement.Hostname;
         if (await wledDevice.Refresh()) //check if the service is a valid WLED light
         {

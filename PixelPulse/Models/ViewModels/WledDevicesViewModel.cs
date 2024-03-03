@@ -18,13 +18,13 @@ public partial class WledDevicesViewModel : ObservableObject
         try
         {
             App.Current.Dispatcher.Dispatch(() =>
+            {
+                foreach (var device in _deviceManager.WLEDDevices)
                 {
-                    foreach (var device in _deviceManager.WLEDDevices)
-                    {
-                        var apiManager = MauiProgram.App.Services.GetService<IWLEDApiManager>();
-                        wledDevices.Add(new WledDeviceViewModel(device, apiManager));
-                    }
-                });
+                    var apiManager = MauiProgram.App.Services.GetService<IWLEDApiManager>();
+                    WledDevices.Add(new WledDeviceViewModel(device, apiManager));
+                }
+            });
         }
         catch (Exception e)
         {
@@ -34,16 +34,18 @@ public partial class WledDevicesViewModel : ObservableObject
 
     private void _deviceManager_WLEDDeviceAdded(WLEDDeviceManager sender, WLEDDevice e)
     {
-        App.Current.Dispatcher.Dispatch(() =>
+        try
         {
-            var apiManager = MauiProgram.App.Services.GetService<IWLEDApiManager>();
-            var vm = new WledDeviceViewModel(e, apiManager);
-            WledDevices.Add(vm);
-        });
-        //var vm = new WledDeviceViewModel(e);
-        //WledDevices.Add(vm);
-        //OnPropertyChanged("WledDevices");
-        //WledDevices = WledDevices;
+            App.Current.Dispatcher.Dispatch(() =>
+            {
+                var apiManager = MauiProgram.App.Services.GetService<IWLEDApiManager>();
+                WledDevices.Add(new WledDeviceViewModel(e, apiManager));
+            });
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
     }
 
     [ObservableProperty] private ObservableCollection<WledDeviceViewModel> wledDevices = new();

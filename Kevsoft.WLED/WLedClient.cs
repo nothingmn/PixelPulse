@@ -31,14 +31,7 @@ public sealed class WLedClient
         var json = await message.Content.ReadAsStringAsync();
         if (json.StartsWith("{"))
         {
-            try
-            {
-                response = JsonSerializer.Deserialize<WLedRootResponse>(json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            response = JsonSerializer.Deserialize<WLedRootResponse>(json);
         }
 
         return response;

@@ -73,7 +73,10 @@ public class WLEDApiManager : IWLEDApiManager
         _client = new WLedClient(_host.AbsoluteUri);
         WledDevice = await _client.Get();
 
-        _log.LogInformation("Connected to device:{host}", _host.AbsoluteUri);
+        //if (WledDevice != null)
+        //{
+        //    _log.LogInformation("Connected to device:{host} as {WledDevice?.Name}", _host.AbsoluteUri);
+        //}
 
         return WledDevice;
     }
