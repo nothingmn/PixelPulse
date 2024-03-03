@@ -29,10 +29,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v8
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
           
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -41,13 +41,13 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net6.0-android --no-restore
+        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-android-ci-build
-          path: PixelPulse/bin/Release/net6.0-android/*Signed.a*
+          path: PixelPulse/bin/Release/net8.0-android/*Signed.a*
 
 # MAUI Windows Build
   build-windows:
@@ -58,10 +58,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v8
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -87,10 +87,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v8
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -99,13 +99,13 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI iOS
-        run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+        run: dotnet build PixelPulse/PixelPulse.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-ios-ci-build
-          path: PixelPulse/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
+          path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*.app
 
 # MAUI MacCatalyst Build
   build-mac:
@@ -116,10 +116,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
 
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@4d4a70f4a5b2a5a5329f13be4ac933f2c9206ac0
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v8
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -128,10 +128,10 @@ jobs:
         run: dotnet restore PixelPulse/PixelPulse.csproj
 
       - name: Build MAUI MacCatalyst
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
 
       - name: Upload MacCatalyst Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-macos-ci-build
-          path: PixelPulse/bin/Release/net6.0-maccatalyst/maccatalyst-x64/publish/*.pkg
+          path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
