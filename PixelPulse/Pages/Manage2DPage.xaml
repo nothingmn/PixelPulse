@@ -7,141 +7,141 @@
              Title="{Binding ProductName}">
     <ContentPage.Content>
         <ScrollView>
-        <VerticalStackLayout x:DataType="viewModels:Manage2DDeviceViewModel">
-            <toolkit:Expander Margin="10" IsExpanded="true">
-                <toolkit:Expander.Header>
-                    <Label Text="Scrolling Text" FontAttributes="Bold" FontSize="Medium" />
-                </toolkit:Expander.Header>
-                <Frame BackgroundColor="Black">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50" ></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+            <VerticalStackLayout x:DataType="viewModels:Manage2DDeviceViewModel">
+                <toolkit:Expander Margin="10" IsExpanded="true">
+                    <toolkit:Expander.Header>
+                        <Label Text="Scrolling Text" FontAttributes="Bold" FontSize="Medium" />
+                    </toolkit:Expander.Header>
+                    <Frame BackgroundColor="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" ></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0"  Text="Plugin:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Picker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedTextPlugin}" ItemsSource="{Binding ScrollingTextPlugins}" ItemDisplayBinding="{Binding Name}">
-                        </Picker>
+                            <Label Grid.Row="0" Grid.Column="0"  Text="Plugin:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Picker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedTextPlugin}" ItemsSource="{Binding ScrollingTextPlugins}" ItemDisplayBinding="{Binding Name}">
+                            </Picker>
 
-                        <Label Grid.Row="1" Grid.Column="0"  Text="Text:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Entry Grid.Row="1" Grid.Column="1"  Margin="5" Placeholder="Scrolling Text..." Text="{Binding ScrollingText}" />
-                        <Button Grid.Row="1" Grid.Column="2"  Text="Set" Command="{Binding SendScrollingTextCommand}" />
+                            <Label Grid.Row="1" Grid.Column="0"  Text="Text:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Entry Grid.Row="1" Grid.Column="1"  Margin="5" Placeholder="Scrolling Text..." Text="{Binding ScrollingText}" />
+                            <Button Grid.Row="1" Grid.Column="2"  Text="Set" Command="{Binding SendScrollingTextCommand}" />
 
-                        <Label Grid.Row="2" Grid.Column="0"  Text="Speed:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Speed}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
-                        <Entry Grid.Row="2" Grid.Column="2"  Margin="5" Text="{Binding Speed}" />
+                            <Label Grid.Row="2" Grid.Column="0"  Text="Speed:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Speed}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
+                            <Entry Grid.Row="2" Grid.Column="2"  Margin="5" Text="{Binding Speed}" />
 
-                        <Label Grid.Row="3" Grid.Column="0"  Text="Y Offset:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding YOffset}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"   ></Slider>
-                        <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding YOffset}" />
+                            <Label Grid.Row="3" Grid.Column="0"  Text="Y Offset:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding YOffset}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"   ></Slider>
+                            <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding YOffset}" />
 
-                        <Label Grid.Row="4" Grid.Column="0"  Text="Trail:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Trail}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"   ></Slider>
-                        <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Trail}" />
+                            <Label Grid.Row="4" Grid.Column="0"  Text="Trail:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Trail}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"   ></Slider>
+                            <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Trail}" />
 
-                        <Label Grid.Row="5" Grid.Column="0"  Text="Font Size:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="5" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding FontSize}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
-                        <Entry Grid.Row="5" Grid.Column="2"  Text="{Binding FontSize}" />
+                            <Label Grid.Row="5" Grid.Column="0"  Text="Font Size:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="5" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding FontSize}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
+                            <Entry Grid.Row="5" Grid.Column="2"  Text="{Binding FontSize}" />
 
-                        <Label Grid.Row="6" Grid.Column="0"  Text="Rotate:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="6" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Rotate}"  Minimum="0" Maximum="31" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
-                        <Entry Grid.Row="6" Grid.Column="2"  Text="{Binding Rotate}" />
-                    </Grid>
-                </Frame>
-            </toolkit:Expander>
+                            <Label Grid.Row="6" Grid.Column="0"  Text="Rotate:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="6" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Rotate}"  Minimum="0" Maximum="31" DragCompletedCommand="{Binding SendScrollingTextCommand}"  ></Slider>
+                            <Entry Grid.Row="6" Grid.Column="2"  Text="{Binding Rotate}" />
+                        </Grid>
+                    </Frame>
+                </toolkit:Expander>
 
-            <toolkit:Expander Margin="10" IsExpanded="true">
-                <toolkit:Expander.Header>
-                    <Label Text="URL To WLED" FontAttributes="Bold" FontSize="Medium" />
-                </toolkit:Expander.Header>
-                <Frame BackgroundColor="Black">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50" ></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                <toolkit:Expander Margin="10" IsExpanded="true">
+                    <toolkit:Expander.Header>
+                        <Label Text="URL To WLED" FontAttributes="Bold" FontSize="Medium" />
+                    </toolkit:Expander.Header>
+                    <Frame BackgroundColor="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" ></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0"  Text="URL:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Entry Grid.Row="0" Grid.Column="1"  Margin="5" Placeholder="Image URL" Text="{Binding ImageUrl}" />
-                        <Button Grid.Row="0" Grid.Column="2"  Text="Set" Command="{Binding SendUrlCommand}" />
+                            <Label Grid.Row="0" Grid.Column="0"  Text="URL:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Entry Grid.Row="0" Grid.Column="1"  Margin="5" Placeholder="Image URL" Text="{Binding ImageUrl}" />
+                            <Button Grid.Row="0" Grid.Column="2"  Text="Set" Command="{Binding SendUrlCommand}" />
 
-                        <Label Grid.Row="1" Grid.Column="0"  Text="Start Index:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding StartIndex}"  Minimum="0" Maximum="255"></Slider>
-                        <Entry Grid.Row="1" Grid.Column="2"  Margin="5" Text="{Binding StartIndex}" />
+                            <Label Grid.Row="1" Grid.Column="0"  Text="Start Index:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding StartIndex}"  Minimum="0" Maximum="255"></Slider>
+                            <Entry Grid.Row="1" Grid.Column="2"  Margin="5" Text="{Binding StartIndex}" />
 
-                        <Label Grid.Row="2" Grid.Column="0"  Text="Wait (s):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="0" Maximum="100" ></Slider>
-                        <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
+                            <Label Grid.Row="2" Grid.Column="0"  Text="Wait (s):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="1" Maximum="100" ></Slider>
+                            <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
 
-                        <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
-                        <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
+                            <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
+                            <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
 
-                        <Label Grid.Row="4" Grid.Column="0"  Text="Iterations:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Iterations}"  Minimum="0" Maximum="100"  ></Slider>
-                        <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Iterations}" />
-                    </Grid>
-                </Frame>
-            </toolkit:Expander>
+                            <Label Grid.Row="4" Grid.Column="0"  Text="Iterations:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Iterations}"  Minimum="0" Maximum="100"  ></Slider>
+                            <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Iterations}" />
+                        </Grid>
+                    </Frame>
+                </toolkit:Expander>
 
-            <toolkit:Expander Margin="10" IsExpanded="true">
-                <toolkit:Expander.Header>
-                    <Label Text="Local Image To WLED" FontAttributes="Bold" FontSize="Medium" />
-                </toolkit:Expander.Header>
-                <Frame BackgroundColor="Black">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50" ></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                <toolkit:Expander Margin="10" IsExpanded="true">
+                    <toolkit:Expander.Header>
+                        <Label Text="Local Image To WLED" FontAttributes="Bold" FontSize="Medium" />
+                    </toolkit:Expander.Header>
+                    <Frame BackgroundColor="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" ></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Text="Pick Image" Command="{Binding SendLocalImageCommand}" />
+                            <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Text="Pick Image" Command="{Binding SendLocalImageCommand}" />
 
-                        <Label Grid.Row="1" Grid.Column="0"  Text="Start Index:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding StartIndex}"  Minimum="0" Maximum="255"></Slider>
-                        <Entry Grid.Row="1" Grid.Column="2"  Margin="5" Text="{Binding StartIndex}" />
+                            <Label Grid.Row="1" Grid.Column="0"  Text="Start Index:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding StartIndex}"  Minimum="0" Maximum="255"></Slider>
+                            <Entry Grid.Row="1" Grid.Column="2"  Margin="5" Text="{Binding StartIndex}" />
 
-                        <Label Grid.Row="2" Grid.Column="0"  Text="Wait (s):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="0" Maximum="100" ></Slider>
-                        <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
+                            <Label Grid.Row="2" Grid.Column="0"  Text="Wait (s):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="1" Maximum="100" ></Slider>
+                            <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
 
-                        <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
-                        <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
+                            <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
+                            <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
 
-                        <Label Grid.Row="4" Grid.Column="0"  Text="Iterations:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
-                        <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Iterations}"  Minimum="0" Maximum="100"  ></Slider>
-                        <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Iterations}" />
-                    </Grid>
-                </Frame>
-            </toolkit:Expander>
-        </VerticalStackLayout>
+                            <Label Grid.Row="4" Grid.Column="0"  Text="Iterations:" Margin="5"  VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="4" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"   Value="{Binding Iterations}"  Minimum="0" Maximum="100"  ></Slider>
+                            <Entry Grid.Row="4" Grid.Column="2"  Text="{Binding Iterations}" />
+                        </Grid>
+                    </Frame>
+                </toolkit:Expander>
+            </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
