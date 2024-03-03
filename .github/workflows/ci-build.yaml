@@ -117,7 +117,7 @@ jobs:
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: pixelpulse-ios-ci-build
-          path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*.app
+          path: PixelPulse/bin/Release/net8.0-ios/iossimulator-x64/**/*
 
 # MAUI MacCatalyst Build
   build-mac:
@@ -151,37 +151,5 @@ jobs:
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: pixelpulse-macos-ci-build
-          path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
+          path: PixelPulse/bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*
 
-# MAUI Linux Build
-  build-linux:
-    runs-on: ubuntu-22.04   
-    name: Ubuntu Build
-    steps:
-    
-      - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
-
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Install MAUI Workload
-        run: dotnet workload install maui --ignore-failed-sources
-
-      - name: Restore Dependencies
-        run: dotnet restore PixelPulse/PixelPulse.csproj
-
-      - name: Build MAUI MacCatalyst
-        run: dotnet publish PixelPulse/PixelPulse.csproj -c Release -f linux-x64 --no-restore -p:BuildIpa=True
-
-      - name: Directory listing
-        run: find $PWD
-
-      - name: Upload MacCatalyst Artifact
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
-        with:
-          name: pixelpulse-macos-ci-build
-          path: PixelPulse/bin/Release/linux-x64/linux-x64/publish/*.pkg
