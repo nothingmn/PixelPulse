@@ -54,6 +54,28 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task ToggleLight()
+    {
+        _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
+        var request = _apiManager.ConvertStateResponseToRequest(_device.WledDevice.State);
+        request.On = !request.On;
+        await _apiManager.SetStateFromRequest(request);
+        _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
+        UpdateState(_device);
+    }
+
+    [RelayCommand]
+    private async Task ChangeBrightness()
+    {
+        _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
+        var request = _apiManager.ConvertStateResponseToRequest(_device.WledDevice.State);
+        request.Brightness = (byte)Brightness;
+        await _apiManager.SetStateFromRequest(request);
+        _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
+        UpdateState(_device);
+    }
+
+    [RelayCommand]
     private async Task SendScrollingText()
     {
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
@@ -204,7 +226,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [ObservableProperty] private int rotate = 15;
     [ObservableProperty] private IList<IScrollingTextPlugin> scrollingTextPlugins;
     [ObservableProperty] private IScrollingTextPlugin selectedTextPlugin;
-    [ObservableProperty] private string imageUrl = "https://cdn.vox-cdn.com/uploads/chorus_asset/file/8692949/no_words_homer_into_brush.gif";
+    [ObservableProperty] private string imageUrl = "https://media1.tenor.com/m/qjM445k2uREAAAAC/eyeball-creepy.gif";
 
     [ObservableProperty] private int startIndex = 0;
     [ObservableProperty] private int wait = 5;

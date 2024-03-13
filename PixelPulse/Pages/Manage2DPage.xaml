@@ -8,9 +8,31 @@
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout x:DataType="viewModels:Manage2DDeviceViewModel">
+
                 <toolkit:Expander Margin="10" IsExpanded="true">
                     <toolkit:Expander.Header>
-                        <Label Text="Scrolling Text" FontAttributes="Bold" FontSize="Medium" />
+                        <Label Text="Device Manager" FontAttributes="Bold" FontSize="Medium" />
+                    </toolkit:Expander.Header>
+                    <Frame BackgroundColor="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70" ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="110"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"  Text="Brightness:" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Slider Grid.Row="0" Grid.Column="1" HorizontalOptions="Fill" Margin="5" VerticalOptions="Center"  Value="{Binding Brightness}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding ChangeBrightnessCommand}"   ></Slider>
+                            <Button Grid.Row="0" Grid.Column="2" Margin="10" Text="{Binding OnOffText, Mode=TwoWay}" HorizontalOptions="Center"  Command="{Binding ToggleLightCommand}"></Button>
+                        </Grid>
+                    </Frame>
+                </toolkit:Expander>
+
+                <toolkit:Expander Margin="10" IsExpanded="false">
+                    <toolkit:Expander.Header>
+                        <Label Text="Scrolling Text   >>" FontAttributes="Bold" FontSize="Medium" />
                     </toolkit:Expander.Header>
                     <Frame BackgroundColor="Black">
                         <Grid>
@@ -60,9 +82,9 @@
                     </Frame>
                 </toolkit:Expander>
 
-                <toolkit:Expander Margin="10" IsExpanded="true">
+                <toolkit:Expander Margin="10" IsExpanded="false">
                     <toolkit:Expander.Header>
-                        <Label Text="URL To WLED" FontAttributes="Bold" FontSize="Medium" />
+                        <Label Text="URL To WLED   >>" FontAttributes="Bold" FontSize="Medium" />
                     </toolkit:Expander.Header>
                     <Frame BackgroundColor="Black">
                         <Grid>
@@ -91,7 +113,7 @@
                             <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="1" Maximum="100" ></Slider>
                             <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
 
-                            <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Label Grid.Row="3" Grid.Column="0"  Text="Frame Delay (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
                             <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
                             <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
 
@@ -102,9 +124,9 @@
                     </Frame>
                 </toolkit:Expander>
 
-                <toolkit:Expander Margin="10" IsExpanded="true">
+                <toolkit:Expander Margin="10" IsExpanded="false">
                     <toolkit:Expander.Header>
-                        <Label Text="Local Image To WLED" FontAttributes="Bold" FontSize="Medium" />
+                        <Label Text="Local Image To WLED   >>" FontAttributes="Bold" FontSize="Medium" />
                     </toolkit:Expander.Header>
                     <Frame BackgroundColor="Black">
                         <Grid>
@@ -131,7 +153,7 @@
                             <Slider Grid.Row="2" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding Wait}"  Minimum="1" Maximum="100" ></Slider>
                             <Entry Grid.Row="2" Grid.Column="2"  Text="{Binding Wait}" />
 
-                            <Label Grid.Row="3" Grid.Column="0"  Text="Pause (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
+                            <Label Grid.Row="3" Grid.Column="0"  Text="Frame Delay (ms):" Margin="5" VerticalTextAlignment="Center" HorizontalOptions="End" />
                             <Slider Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center"  Value="{Binding PauseBetweenFrames}"  Minimum="0" Maximum="10000" ></Slider>
                             <Entry Grid.Row="3" Grid.Column="2"  Text="{Binding PauseBetweenFrames}" />
 

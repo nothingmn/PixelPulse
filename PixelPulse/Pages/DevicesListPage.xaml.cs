@@ -16,4 +16,9 @@ public partial class DevicesListPage : ContentPage
 
         BindingContext = new WledDevicesViewModel();
     }
+
+    private void EntryText_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        (this.BindingContext as WledDevicesViewModel).FilterCommand.ExecuteAsync(e);
+    }
 }

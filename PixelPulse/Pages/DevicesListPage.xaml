@@ -3,42 +3,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PixelPulse.Models.ViewModels"
+             xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
              x:Class="PixelPulse.Pages.DevicesListPage"
              Title="Pixel Pulse">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding WledDevices}" Margin="5">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:WledDeviceViewModel">
-                    <Frame BackgroundColor="Transparent" BorderColor="#512BD4" Margin="10">
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="110" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Row="0" BackgroundColor="Black">
+                <Entry Placeholder="Filter..." x:Name="EntryText" ReturnCommand="{Binding FilterCommand}" TextChanged="EntryText_OnTextChanged" Text="{Binding FilterText}">
+                </Entry>
+            </Frame>
+            <CollectionView x:Name="WledDeviceCollectionView" ItemsSource="{Binding WledDevices}" Margin="5" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:WledDeviceViewModel">
+                        <Frame BackgroundColor="Transparent" BorderColor="#512BD4" Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="110" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" Text="{Binding EndpointName}" FontSize="20" />
-                            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Fill" Text="{Binding LedDetails}" />
-                            
-                            <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Fill"  Value="{Binding Brightness}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding ChangeBrightnessCommand}" ></Slider>
+                                <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" Text="{Binding EndpointName}" FontSize="20" />
+                                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Fill" Text="{Binding LedDetails}" />
 
-                            <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Transparent">
-                                <StackLayout Orientation="Horizontal">
-                                    <Button Margin="10" Text="2D" IsVisible="{Binding Is2D}" HorizontalOptions="Start" Command="{Binding View2DCommand}"></Button>
-                                    <Button Margin="10" Text="{Binding OnOffText, Mode=TwoWay}" HorizontalOptions="Center"  Command="{Binding ToggleLightCommand}"></Button>
-                                    <Button Margin="10" Text="Manage" HorizontalOptions="End" Command="{Binding ViewManageCommand}"></Button>
-                                </StackLayout>
-                            </Frame>
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Fill"  Value="{Binding Brightness}"  Minimum="0" Maximum="255" DragCompletedCommand="{Binding ChangeBrightnessCommand}" ></Slider>
+
+                                <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Transparent">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Button Margin="10" Text="2D" IsVisible="{Binding Is2D}" HorizontalOptions="Start" Command="{Binding View2DCommand}"></Button>
+                                        <Button Margin="10" Text="{Binding OnOffText, Mode=TwoWay}" HorizontalOptions="Center"  Command="{Binding ToggleLightCommand}"></Button>
+                                        <Button Margin="10" Text="Manage" HorizontalOptions="End" Command="{Binding ViewManageCommand}"></Button>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -147,7 +147,14 @@ public class WLEDApiManager : IWLEDApiManager
 
     public async Task SetStateFromRequest(StateRequest state)
     {
-        await _client.Post(state);
+        try
+        {
+            await _client.Post(state);
+        }
+        catch (Exception e)
+        {
+            _log.LogError(e, "Error setting state from request");
+        }
     }
 
     public async Task On(int? brightness)

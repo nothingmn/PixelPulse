@@ -14,7 +14,6 @@
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<RuntimeIdentifiers Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
-		<RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('windows'))">win10-x64</RuntimeIdentifiers>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>PixelPulse</RootNamespace>
@@ -54,8 +53,8 @@
 		<AndroidKeyStore>True</AndroidKeyStore>
 		<AndroidSigningKeyStore>pixelpulse.keystore</AndroidSigningKeyStore>
 		<AndroidSigningKeyAlias>key</AndroidSigningKeyAlias>
-		<AndroidSigningKeyPass></AndroidSigningKeyPass>
-		<AndroidSigningStorePass></AndroidSigningStorePass>
+		<AndroidSigningKeyPass>88888888</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>88888888</AndroidSigningStorePass>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
@@ -157,9 +156,10 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
 		<PackageReference Include="Tmds.MDns" Version="0.8.0" />
 	</ItemGroup>
 
@@ -192,6 +192,9 @@
 	<ItemGroup>
 	  <None Update="Pages\Manage2DPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="pixelpulse.keystore">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
