@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using PixelPulse.Models.ViewModels;
 using PixelPulse.Pages;
 using WLEDAnimated;
 using WLEDAnimated.Animation;
@@ -38,6 +39,9 @@ namespace PixelPulse
             builder.Services.AddTransient<MultiStep, MultiStep>();
             builder.Services.AddTransient<DisplayImageStep, DisplayImageStep>();
             builder.Services.AddTransient<WLEDStateStep, WLEDStateStep>();
+            builder.Services.AddTransient<Manage2DDeviceViewModel, Manage2DDeviceViewModel>();
+            builder.Services.AddTransient<WledDevicesViewModel, WledDevicesViewModel>();
+            builder.Services.AddTransient<WledDeviceViewModel, WledDeviceViewModel>();
 
             builder.Services.AddTransient<DisplayTextStep, DisplayTextStep>();
             builder.Services.AddTransient<DisplayRenderedWeatherImageStep, DisplayRenderedWeatherImageStep>();

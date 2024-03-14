@@ -89,6 +89,7 @@ public partial class WledDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task View2D()
     {
+        MauiProgram.App.Services.GetService<WLEDDeviceManager>();
         var vm = new Manage2DDeviceViewModel(this._device, this._apiManager);
 
         var navigationParameter = new ShellNavigationQueryParameters

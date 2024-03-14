@@ -2,6 +2,7 @@
 using System.Reflection.Metadata.Ecma335;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using PixelPulse.Pages;
 using WLEDAnimated;
 using WLEDAnimated.Interfaces;
@@ -14,6 +15,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
 {
     private WLEDDevice _device;
     private readonly IWLEDApiManager _apiManager;
+    public ILogger<Manage2DDeviceViewModel> Log { get; set; } = MauiProgram.App.Services.GetService<ILogger<Manage2DDeviceViewModel>>();
     private readonly IScrollingTextPluginFactory _scrollingTextPluginFactory;
     private readonly IImageSender _sender;
 
@@ -28,6 +30,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
 
     private void UpdateState(WLEDDevice device)
     {
+        Log.LogInformation("{MethodName}", nameof(UpdateState));
         _device = device;
         NetworkAddress = device.NetworkAddress;
         Name = device.Name;
@@ -56,6 +59,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task ToggleLight()
     {
+        Log.LogInformation("{MethodName}", nameof(ToggleLight));
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
         var request = _apiManager.ConvertStateResponseToRequest(_device.WledDevice.State);
         request.On = !request.On;
@@ -67,6 +71,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task ChangeBrightness()
     {
+        Log.LogInformation("{MethodName}", nameof(ChangeBrightness));
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
         var request = _apiManager.ConvertStateResponseToRequest(_device.WledDevice.State);
         request.Brightness = (byte)Brightness;
@@ -78,6 +83,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task SendScrollingText()
     {
+        Log.LogInformation("{MethodName}", nameof(SendScrollingText));
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
 
         if (SelectedTextPlugin == null)
@@ -95,6 +101,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task SendLocalImage()
     {
+        Log.LogInformation("{MethodName}", nameof(SendLocalImage));
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
 
         //Bmp
@@ -148,6 +155,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
 
     public async Task<FileResult> PickAndShow(PickOptions options)
     {
+        Log.LogInformation("{MethodName}", nameof(PickAndShow));
         try
         {
             var result = await FilePicker.Default.PickAsync(options);
@@ -164,14 +172,19 @@ public partial class Manage2DDeviceViewModel : ObservableObject
     [RelayCommand]
     private async Task SendUrl()
     {
+        Log.LogInformation("{MethodName}", nameof(SendUrl));
         _device.WledDevice = await _apiManager.Connect(_device.NetworkAddress);
 
         var url = this.ImageUrl;
+        Log.LogInformation("{url}", url);
 
-        if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+        if (string.IsNullOrWhiteSpace(url)) return;
+
         System.Uri uri;
         if (System.Uri.TryCreate(url, UriKind.Absolute, out uri))
         {
+            Log.LogInformation("Attempting to download: {url}", url);
+
             //download image from url
             var client = new HttpClient();
             var response = await client.GetAsync(url);
@@ -179,6 +192,7 @@ public partial class Manage2DDeviceViewModel : ObservableObject
             using (var stream = await response.Content.ReadAsStreamAsync())
             {
                 var filename = Path.GetFileName(uri.LocalPath);
+                Log.LogInformation("Attempting to download to: {filename}", filename);
                 if (string.IsNullOrWhiteSpace(filename))
                 {
                     filename = Guid.NewGuid().ToString();
@@ -189,24 +203,30 @@ public partial class Manage2DDeviceViewModel : ObservableObject
                         var extension = contentType.Split('/').Last();
                         filename = $"{filename}.{extension}";
                     }
+                    Log.LogInformation("Attempting to resolve filename to: {filename}", filename);
                 }
 
                 var filePath = System.IO.Path.Combine(Path.GetTempPath(), filename);
                 var fileInfo = new System.IO.FileInfo(filePath);
+                Log.LogInformation("Download location: {filePath}", filePath);
+
                 if (string.IsNullOrWhiteSpace(fileInfo.Extension)) filePath = $"{filePath}.gif";
 
                 using (var fileStream = System.IO.File.Create(filePath))
                 {
                     await stream.CopyToAsync(fileStream);
                 }
+                Log.LogInformation("Copied download to: {filePath}", filePath);
 
                 try
                 {
                     Task.Factory.StartNew(() =>
                     {
+                        Log.LogInformation("Sending: {filePath}", filePath);
+
                         _sender.Send(_device.NetworkAddress, 21324, filePath,
-                            new Size(_device.Width.Value, _device.Height.Value), StartIndex, (byte)Wait, PauseBetweenFrames,
-                            Iterations);
+                                    new Size(_device.Width.Value, _device.Height.Value), StartIndex, (byte)Wait, PauseBetweenFrames,
+                                    Iterations);
                     });
                 }
                 catch (Exception)

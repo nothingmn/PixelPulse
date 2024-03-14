@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PixelPulse.Models.ViewModels"
-             xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              x:Class="PixelPulse.Pages.DevicesListPage"
              Title="Pixel Pulse">
     <ContentPage.Content>
@@ -16,7 +16,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Frame Grid.Row="0" BackgroundColor="Black">
-                <Entry Placeholder="Filter..." x:Name="EntryText" ReturnCommand="{Binding FilterCommand}" TextChanged="EntryText_OnTextChanged" Text="{Binding FilterText}">
+                <Entry Placeholder="Filter..."
+                       ClearButtonVisibility="WhileEditing"
+                       IsSpellCheckEnabled="False"
+                       ReturnCommand="{Binding FilterCommand}"
+                       TextChanged="EntryText_OnTextChanged"
+                       Text="{Binding FilterText}">
                 </Entry>
             </Frame>
             <CollectionView x:Name="WledDeviceCollectionView" ItemsSource="{Binding WledDevices}" Margin="5" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0">
