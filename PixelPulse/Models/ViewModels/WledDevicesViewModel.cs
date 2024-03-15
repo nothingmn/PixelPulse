@@ -38,6 +38,7 @@ public partial class WledDevicesViewModel : ObservableObject
     private async Task AddDevice()
     {
         await _deviceManager.AddDeviceByHostOrIp(AddNewHost);
+        AddNewHost = "";
     }
 
     [RelayCommand]
