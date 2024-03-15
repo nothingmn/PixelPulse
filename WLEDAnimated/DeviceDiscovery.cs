@@ -34,7 +34,6 @@ public class DeviceDiscovery
     private async void OnServiceAdded(object sender, ServiceAnnouncementEventArgs e)
     {
         var wledDevice = _services.GetService(typeof(WLEDDevice)) as WLEDDevice;
-
         wledDevice.NetworkAddress = e.Announcement.Addresses.FirstOrDefault().ToString();
         wledDevice.Name = e.Announcement.Hostname;
         if (await wledDevice.Refresh()) //check if the service is a valid WLED light

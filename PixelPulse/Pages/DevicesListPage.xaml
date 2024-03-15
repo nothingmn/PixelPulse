@@ -7,15 +7,24 @@
              x:Class="PixelPulse.Pages.DevicesListPage"
              Title="Pixel Pulse">
     <ContentPage.Content>
-        <Grid>
+        <Grid Margin="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="110"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Frame Grid.Row="0" BackgroundColor="Black">
+            <Frame Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" BackgroundColor="Transparent" BorderColor="#512BD4" Margin="10">
+                <Entry Placeholder="Add new by IP or Host name.."
+                       ClearButtonVisibility="WhileEditing"
+                       IsSpellCheckEnabled="False"
+                       ReturnCommand="{Binding AddDeviceCommand}"
+                       Text="{Binding AddNewHost}" HorizontalOptions="Fill">
+                </Entry>
+            </Frame>
+            <Frame Grid.Row="1" BackgroundColor="Transparent" BorderColor="#512BD4" Margin="10">
                 <Entry Placeholder="Filter..."
                        ClearButtonVisibility="WhileEditing"
                        IsSpellCheckEnabled="False"
@@ -24,15 +33,15 @@
                        Text="{Binding FilterText}">
                 </Entry>
             </Frame>
-            <CollectionView x:Name="WledDeviceCollectionView" ItemsSource="{Binding WledDevices}" Margin="5" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0">
+            <CollectionView x:Name="WledDeviceCollectionView" ItemsSource="{Binding WledDevices}" Margin="5" VerticalScrollBarVisibility="Always" Grid.Row="2" Grid.Column="0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WledDeviceViewModel">
                         <Frame BackgroundColor="Transparent" BorderColor="#512BD4" Margin="10">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="35" />
-                                    <RowDefinition Height="35" />
-                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
                                     <RowDefinition Height="110" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>

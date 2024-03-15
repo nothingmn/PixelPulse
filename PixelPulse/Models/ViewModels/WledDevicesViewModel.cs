@@ -32,6 +32,13 @@ public partial class WledDevicesViewModel : ObservableObject
     }
 
     [ObservableProperty] private string filterText = "";
+    [ObservableProperty] private string addNewHost = "";
+
+    [RelayCommand]
+    private async Task AddDevice()
+    {
+        await _deviceManager.AddDeviceByHostOrIp(AddNewHost);
+    }
 
     [RelayCommand]
     private async Task Filter()
@@ -42,7 +49,14 @@ public partial class WledDevicesViewModel : ObservableObject
         }
         else
         {
-            WledDevices = (from w in AllWledDevices where w.Name.Contains(FilterText, StringComparison.InvariantCultureIgnoreCase) select w).ToObservableCollection<WledDeviceViewModel>();
+            WledDevices = (from w in AllWledDevices
+                           where
+                w.Name.Contains(FilterText, StringComparison.InvariantCultureIgnoreCase)
+                ||
+                w.NetworkAddress.Contains(FilterText, StringComparison.InvariantCultureIgnoreCase)
+                ||
+                w.LedDetails.Contains(FilterText, StringComparison.InvariantCultureIgnoreCase)
+                           select w).ToObservableCollection<WledDeviceViewModel>();
         }
     }
 
@@ -51,21 +65,31 @@ public partial class WledDevicesViewModel : ObservableObject
         try
         {
             var apiManager = MauiProgram.App.Services.GetService<IWLEDApiManager>();
-            var exists = WledDevices.Any(d => d.NetworkAddress.Equals(e.NetworkAddress, StringComparison.InvariantCultureIgnoreCase));
-            if (!exists)
-            {
-                WledDevices.Add(new WledDeviceViewModel(e, apiManager));
-            }
-            var exists1 = AllWledDevices.Any(d => d.NetworkAddress.Equals(e.NetworkAddress, StringComparison.InvariantCultureIgnoreCase));
-            if (!exists)
-            {
-                AllWledDevices.Add(new WledDeviceViewModel(e, apiManager));
-            }
+            WledDevices.Add(new WledDeviceViewModel(e, apiManager));
+            AllWledDevices.Add(new WledDeviceViewModel(e, apiManager));
+            Deduplication(WledDevices);
+            Deduplication(AllWledDevices);
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
         }
+    }
+
+    private ObservableCollection<WledDeviceViewModel> Deduplication(ObservableCollection<WledDeviceViewModel> collection)
+    {
+        // Assuming AllWledDevices is your ObservableCollection<WledDeviceViewModel>
+        var uniqueItems = collection
+            .GroupBy(device => device.NetworkAddress) // Group by NetworkAddress
+            .Select(group => group.First()) // Select the first item from each group
+            .ToList(); // Convert to List for easier handling
+
+        collection.Clear(); // Clear the original collection
+        foreach (var item in uniqueItems)
+        {
+            collection.Add(item); // Add back the unique items
+        }
+        return collection;
     }
 
     private ObservableCollection<WledDeviceViewModel> AllWledDevices = new();

@@ -4,11 +4,31 @@ public delegate void WLEDDeviceAddedEventHandler(WLEDDeviceManager sender, WLEDD
 
 public class WLEDDeviceManager
 {
+    private readonly IServiceProvider _services;
+
     public event WLEDDeviceAddedEventHandler? WLEDDeviceAdded;
 
     public List<WLEDDevice> WLEDDevices { get; set; } = new List<WLEDDevice>();
 
     private SpinLock _spinLock = new SpinLock();
+
+    public WLEDDeviceManager(IServiceProvider services)
+    {
+        _services = services;
+    }
+
+    public async Task AddDeviceByHostOrIp(string hostOrIp)
+    {
+        var wledDevice = _services.GetService(typeof(WLEDDevice)) as WLEDDevice;
+        wledDevice.NetworkAddress = hostOrIp;
+        var isActive = await wledDevice.Refresh(); //check if the service is a valid WLED light
+        if (isActive)
+        {
+            wledDevice.Name = wledDevice.WledDevice.Information.Name;
+        }
+
+        AddDevice(wledDevice);
+    }
 
     public void AddDevice(WLEDDevice device)
     {
